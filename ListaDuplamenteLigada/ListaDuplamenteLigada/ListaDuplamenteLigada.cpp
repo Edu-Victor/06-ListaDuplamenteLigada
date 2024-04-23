@@ -20,6 +20,7 @@ void exibirReverso();
 void inserirElemento();
 void excluirPrimeiroElemento();
 void excluirUltimoElemento();
+NO* posicaoElemento(int numero);
 
 //--------------------------
 
@@ -43,7 +44,8 @@ void menu()
 		cout << "5 - Exibir elementos na ordem reversa \n";
 		cout << "6 - Excluir primeiro elemento \n";
 		cout << "7 - Excluir ultimo elemento \n";
-		cout << "8 - Sair \n\n";
+		cout << "8 - Excluir Elemento \n";
+		cout << "9 - Sair \n\n";
 
 		cout << "Opcao: ";
 		cin >> op;
@@ -54,7 +56,7 @@ void menu()
 			break;
 		case 2:inserirElemento();
 			break;
-		case 3: exibirQuantidadeElementos(); 
+		case 3: exibirQuantidadeElementos();
 			break;
 		case 4: exibirElementos();
 			break;
@@ -64,7 +66,9 @@ void menu()
 			break;
 		case 7: excluirUltimoElemento();
 			break;
-		case 8:
+		case 8: excluirUltimoElemento();
+			break;
+		case 9:
 			return;
 		default:
 			break;
@@ -150,19 +154,74 @@ void inserirElemento()
 // funções a serem implementadas no exericio
 void exibirReverso()
 {
-
+	if (primeiro == NULL) {
+		cout << "Lista vazia \n";
+		return;
+	}
+	else {
+		cout << "Elementos: \n";
+		NO* aux = ultimo;
+		while (aux != NULL) {
+			cout << aux->valor << endl;
+			aux = aux->ant;
+		}
+	}
 }
 
 void excluirPrimeiroElemento()
 {
+	if (primeiro == NULL) {
+		cout << "Lista vazia \n";
+		return;
+	}
+	else {
+		NO* aux = primeiro;
+		primeiro = primeiro->prox;
 
+		if (primeiro != NULL) {
+			primeiro->ant = NULL;
+		}
+		else {
+			ultimo = NULL;
+		}
+		free(aux);
+
+	}
 }
 
 void excluirUltimoElemento()
 {
+	if (primeiro == NULL) {
+		cout << "Lista vazia \n";
+		return;
+	}
+	else {
+		NO* aux = ultimo;
+		ultimo = ultimo->ant;
 
+		if (primeiro != NULL) {
+			ultimo->prox = NULL;
+		}
+		else {
+			primeiro = NULL;
+		}
+		free(aux);
+
+	}
 }
 
+NO* posicaoElemento(int numero)
+{
+	NO* aux = primeiro;
+	while (aux != NULL) {
+		if (aux->valor == numero)
+		{
+			break;
+		}
+		aux = aux->prox;
+	}
+	return aux;
+}
 
 
 
